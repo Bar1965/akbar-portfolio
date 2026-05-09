@@ -1,4 +1,4 @@
-# Dependencies
+# Dependencies - JANGAN di-upload!
 node_modules/
 
 # Build output
@@ -10,7 +10,7 @@ dist/
 .env.local
 .env*.local
 
-# OS
+# System
 .DS_Store
 Thumbs.db
 
