@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 /**
  * Custom hook to trigger animations when elements enter/leave the viewport.
@@ -22,9 +22,8 @@ export function useScrollAnimation(options = { threshold: 0.2, rootMargin: '0px'
       },
       {
         threshold: options.threshold,
-        rootMargin: options.rootMargin,
-        // Disable if not supported (fallback to always visible)
-        fallback: () => setIsVisible(true)
+        rootMargin: options.rootMargin
+        // ✅ Hapus 'fallback' karena tidak didukung oleh IntersectionObserver API
       }
     )
 
