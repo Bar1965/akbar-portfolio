@@ -57,33 +57,34 @@ export default function Projects() {
     <section id="projects" className="section" ref={sectionRef}>
       {/* Section Header */}
       <div className={`section-header ${isVisible ? 'visible' : ''}`}>
-        <span className="section-number">03.</span>
         <h2 className="section-title">Featured Projects</h2>
         <div className="section-divider" />
       </div>
       
-      {/* Filter Buttons */}
-      <div className="projects-filter" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap' }}>
-        {categories.map(cat => (
-          <button
-            key={cat}
-            className={`filter-btn ${filter === cat ? 'active' : ''}`}
-            onClick={() => setFilter(cat)}
-            style={{
-              padding: '0.6rem 1.5rem',
-              background: filter === cat ? 'var(--accent)' : 'var(--bg-light)',
-              color: filter === cat ? 'var(--bg)' : 'var(--text-muted)',
-              border: '1px solid var(--border)',
-              borderRadius: '25px',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              fontWeight: '500'
-            }}
-          >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
-          </button>
-        ))}
-      </div>
+{/* Filter Buttons */}
+<div className="projects-filter">
+  {categories.map(cat => (
+    <button
+      key={cat}
+      className={`filter-btn ${filter === cat ? 'active' : ''}`}
+      onClick={() => setFilter(cat)}
+      style={{
+        padding: '0.6rem 1.5rem',
+        background: filter === cat ? 'var(--accent)' : 'transparent',
+        color: filter === cat ? 'var(--bg)' : 'var(--text-muted)',
+        border: '1px solid var(--border)',
+        borderRadius: '25px',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        fontWeight: '500',
+        fontSize: '0.9rem',
+        minWidth: '80px'
+      }}
+    >
+      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+    </button>
+  ))}
+</div>
 
       {/* Projects Grid */}
       <div className="projects-grid">

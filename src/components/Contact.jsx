@@ -60,7 +60,7 @@ export default function Contact() {
     <section id="contact" className="section" ref={sectionRef}>
       {/* Header */}
       <div className={`section-header ${isVisible ? 'visible' : ''}`} style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <span className="contact-subtitle">04. What's Next?</span>
+        <span className="contact-subtitle"> What's Next?</span>
         <h2 className="contact-title gradient-text">Get In Touch</h2>
         <p className="contact-description">
           I'm currently looking for new opportunities. Whether you have a question, 

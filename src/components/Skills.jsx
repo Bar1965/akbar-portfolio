@@ -17,7 +17,6 @@ export default function Skills() {
     <section id="skills" className="section" ref={sectionRef}>
       {/* Section Header */}
       <div className={`section-header ${isVisible ? 'visible' : ''}`}>
-        <span className="section-number">02.</span>
         <h2 className="section-title">My Skills</h2>
         <div className="section-divider" />
       </div>

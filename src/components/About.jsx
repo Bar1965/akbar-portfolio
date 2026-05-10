@@ -8,7 +8,6 @@ export default function About() {
     <section id="about" className="section" ref={sectionRef}>
       {/* Section Header */}
       <div className={`section-header ${isVisible ? 'visible' : ''}`}>
-        <span className="section-number">01.</span>
         <h2 className="section-title">About Me</h2>
         <div className="section-divider" />
       </div>
