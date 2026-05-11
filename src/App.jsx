@@ -5,47 +5,57 @@ import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
-import Preloader from './components/Preloader'
+import ScrollProgress from './components/scrollProgress'
+import ParticlesBg from './components/ParticlesBg'
+import GitHubStats from './components/GitHubStats'
 import CustomCursor from './components/CustomCursor'
+import Preloader from './components/Preloader'
+import BackToTop from './components/BackToTop'
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark'
+  })
+  const [isLoading, setIsLoading] = useState(true)
 
+  // Apply theme to document
   useEffect(() => {
-    // Create particles
-    const particlesContainer = document.querySelector('.particles')
-    if (particlesContainer) {
-      for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div')
-        particle.className = 'particle'
-        particle.style.left = `${Math.random() * 100}%`
-        particle.style.animationDelay = `${Math.random() * 20}s`
-        particle.style.animationDuration = `${15 + Math.random() * 10}s`
-        particlesContainer.appendChild(particle)
-      }
-    }
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
-    // Simulate loading
-    const timer = setTimeout(() => setLoading(false), 2500)
+  // Preloader timer
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1800)
     return () => clearTimeout(timer)
   }, [])
 
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+  }
+
   return (
     <>
-      <div className="particles" />
+      <Preloader isLoading={isLoading} />
       <CustomCursor />
-      <Preloader isLoading={loading} />
-      <Navbar />
-      <main style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s' }}>
+      <ParticlesBg count={40} />
+      <ScrollProgress />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      
+      <main>
         <Hero />
         <About />
         <Skills />
         <Projects />
+        <GitHubStats username="Bar1965" />
         <Contact />
       </main>
+
       <footer className="footer">
         <p>Designed & Built by Akbar © {new Date().getFullYear()}</p>
       </footer>
+      
+      <BackToTop />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 /**
  * Custom hook to trigger animations when elements enter/leave the viewport.
@@ -7,7 +7,8 @@ import { useState, useEffect, useRef } from 'react'
  * @param {Object} options - IntersectionObserver options
  * @returns {[React.RefObject, boolean]} - [ref, isVisible]
  */
-export function useScrollAnimation(options = { threshold: 0.2, rootMargin: '0px' }) {
+export function useScrollAnimation(options = {}) {
+  const { threshold = 0.2, rootMargin = '0px' } = options
   const [isVisible, setIsVisible] = useState(false)
   const elementRef = useRef(null)
 
@@ -17,23 +18,17 @@ export function useScrollAnimation(options = { threshold: 0.2, rootMargin: '0px'
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Sync visibility state with intersection status
         setIsVisible(entry.isIntersecting)
       },
-      {
-        threshold: options.threshold,
-        rootMargin: options.rootMargin
-        // ✅ Hapus 'fallback' karena tidak didukung oleh IntersectionObserver API
-      }
+      { threshold, rootMargin }
     )
 
     observer.observe(element)
 
-    // Cleanup observer on unmount or options change
     return () => {
       observer.disconnect()
     }
-  }, [options.threshold, options.rootMargin])
+  }, [threshold, rootMargin])
 
   return [elementRef, isVisible]
 }
